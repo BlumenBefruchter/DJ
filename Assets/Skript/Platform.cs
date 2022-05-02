@@ -6,11 +6,11 @@ public class Platform : MonoBehaviour
 {
     public float jumpForce = 10f;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.relativeVelocity.y <= 0f)
         {
-            Rigidbody rb = collision.collider.GetComponent<Rigidbody>();
+            Rigidbody2D rb = collision.collider.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
                 Vector3 velocity = rb.velocity;
@@ -18,6 +18,10 @@ public class Platform : MonoBehaviour
                 rb.velocity = velocity;
             }
         }
-        
+        if (collision.gameObject.CompareTag("KillZone"))
+        {
+            Destroy(gameObject);
+        }
+
     }   
 }
