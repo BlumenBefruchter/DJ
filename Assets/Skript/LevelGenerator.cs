@@ -10,7 +10,12 @@ public class LevelGenerator : MonoBehaviour
     public float levelWidth = 3f;
     public float minY = .2f;
     public float maxY = 1.5f;
+
+    public GameObject[] prefabs;
     
+    
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,14 +25,16 @@ public class LevelGenerator : MonoBehaviour
         {
             spawnPosition.y += Random.Range(minY, maxY);
             spawnPosition.x = Random.Range(-levelWidth, levelWidth);
+
+            int prefabsIndex = UnityEngine.Random.Range(0, 1);
+            Instantiate(prefabs[prefabsIndex], spawnPosition, Quaternion.identity);
             
-            Instantiate(platformPrefab, spawnPosition, Quaternion.identity);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

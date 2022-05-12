@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
@@ -8,6 +9,9 @@ public class Player : MonoBehaviour
     public float movementSpeed = 10f;
     float movement = 0f;
     Rigidbody2D rb;
+
+    public Transform hole;
+    public GameObject EiPrefab;
     
     // Start is called before the first frame update
     void Start()
@@ -19,8 +23,15 @@ public class Player : MonoBehaviour
     void Update()
     {
         movement = Input.GetAxis("Horizontal") * movementSpeed;
-       
+        //if (Input.GetButtonDown("Fire1"))
+        //{
+          //  Shoot();
+        //}
     }
+    //void Shoot()
+    //{
+      //  Instantiate(EiPrefab, hole.position, hole.rotation);
+    //}
 
     private void FixedUpdate()
     {
@@ -33,12 +44,14 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Monster"))
         {
+            SceneManager.LoadScene("GO");
             Destroy(gameObject);
-            Application.Quit();
+            
         }
         else if (collision.gameObject.CompareTag("KillZone"))
         {
             Destroy(gameObject);
+            SceneManager.LoadScene("GO");
         }
     }
 
